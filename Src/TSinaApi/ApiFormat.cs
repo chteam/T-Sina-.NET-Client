@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace CHSNS.Rest
+namespace TSinaApi
 {
-    public class Class1
+    public enum ApiFormat
     {
+        json = 0,
+        xml = 1
     }
 }

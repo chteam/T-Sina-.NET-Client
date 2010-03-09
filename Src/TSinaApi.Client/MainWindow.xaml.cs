@@ -22,6 +22,9 @@ namespace TSinaApi.Client
         public MainWindow()
         {
             InitializeComponent();
+            TSinaClient client = new TSinaClient(ClientKey.AppKey, ClientKey.AppSecret);
+            client.Users.Show("重典");
+
         }
     }
 }
