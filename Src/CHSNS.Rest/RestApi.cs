@@ -49,13 +49,56 @@ namespace CHSNS.Rest
             }
             request.Accept = "*/*"; //接受任意文件
             request.UserAgent = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.1.4322)"; // 模拟使用IE在浏览
-            //请求.AllowAutoRedirect = false;//这里不允许302
-
             request.Headers["Accept-Language"] = "zh-cn,zh;q=0.5";
 
             request.UserAgent = "TSina 0.1" ;
             request.ReadWriteTimeout = c_DefaultTimeout;
             request.Method = "Get";
+            string responseText = null;
+            try
+            {
+                responseText = GetResponseText(request);
+            }
+            catch (WebException ex)
+            {
+                throw new ApplicationException(
+                    String.Format(CultureInfo.InvariantCulture, "An error occured accesing page {0}", uri)
+                    , ex);
+            }
+            return responseText;
+        }
+        public string Post(Uri uri, IDictionary<string, string> vars, bool authenticate)
+        {
+            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(uri);
+            if (authenticate)
+            {
+                string usernamePassword = Username + ":" + Password;
+                CredentialCache mycache = new CredentialCache();
+                mycache.Add(uri, "Basic", new NetworkCredential(Username, Password));
+                request.Credentials = mycache;
+                request.Headers.Add("Authorization", "Basic " + Convert.ToBase64String(new ASCIIEncoding().GetBytes(usernamePassword)));
+            }
+             
+            request.ReadWriteTimeout = c_DefaultTimeout;
+            request.Method = "POST";
+            request.ContentType = "application/x-www-form-urlencoded";
+            if (request.ServicePoint != null)
+            {
+                request.ServicePoint.Expect100Continue = false;
+            }
+
+            // Append params to post-request
+            string paramlist = GetParamString(vars);
+            request.ContentLength = paramlist.Length;
+
+            using (Stream postStream = request.GetRequestStream())
+            {
+                UTF8Encoding encoding = new UTF8Encoding();
+                byte[] bytes = encoding.GetBytes(paramlist);
+                postStream.Write(bytes, 0, bytes.Length);
+            }
+
+            // Perform request
             string responseText = null;
             try
             {

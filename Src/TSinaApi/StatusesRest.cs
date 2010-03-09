@@ -22,7 +22,6 @@ namespace TSinaApi
                 string.Format("users/show/{0}.{1}", id, Client.Format),
                 new Dictionary<string, string> { { "source", Client.ApiKey.ToString() } }, true);
             return Client.GetObject<User>(text);
-            //return new User();
         }
         public User Show(string name)
         {

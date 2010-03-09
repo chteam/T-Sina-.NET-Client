@@ -22,6 +22,7 @@ namespace TSinaApi
             ApiKey = apiKey;
             //ApiSecret = apiSecret;
             Users = new UsersRest(this);
+            Statuses = new StatusesRest(this);
             ApiUrl = "http://api.t.sina.com.cn/";
             RestApi = new RestApi(ApiUrl)
             {
@@ -31,7 +32,7 @@ namespace TSinaApi
             Format = ApiFormat.json;
         }
         public UsersRest Users { get; private set; }
-
+        public StatusesRest Statuses { get; set; }
         public T GetObject<T>(string text)
         {
             if (Format == ApiFormat.json)
