@@ -43,7 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="OAuth\AccessToken.cs" />
+    <Compile Include="OAuth\Consumer.cs" />
+    <Compile Include="OAuth\IToken.cs" />
+    <Compile Include="OAuth\Parameter.cs" />
+    <Compile Include="OAuth\RequestToken.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
