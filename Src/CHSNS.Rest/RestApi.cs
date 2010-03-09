@@ -21,8 +21,8 @@ namespace CHSNS.Rest
         #region private field
 
         private const int c_DefaultTimeout = 10 * 1000;
-        private string username;
-        private string password;
+        public string Username { get; set; }
+        public string Password { get; set; }
 
         #endregion
 
@@ -39,12 +39,11 @@ namespace CHSNS.Rest
             }
  
             HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(httpuri);
-            if (true)
+            if (authenticate)
             {
- 
-                string usernamePassword = username + ":" + password;
+                string usernamePassword = Username + ":" + Password;
                 CredentialCache mycache = new CredentialCache();
-                mycache.Add(new Uri(httpuri), "Basic", new NetworkCredential(username, password));
+                mycache.Add(new Uri(httpuri), "Basic", new NetworkCredential(Username, Password));
                 request.Credentials = mycache;
                 request.Headers.Add("Authorization", "Basic " + Convert.ToBase64String(new ASCIIEncoding().GetBytes(usernamePassword))); 
             }

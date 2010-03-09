@@ -10,9 +10,10 @@ namespace TSinaApi.Console
     {
         static void Main(string[] args)
         {
-            TSinaClient client = new TSinaClient(ClientKey.AppKey, ClientKey.AppSecret);
-            client.Users.Show(1660678232);
+            TSinaClient client = new TSinaClient(ClientKey.AppKey,"chsword@126.com","xxxx");
+            var user = client.Users.Show(1660678232);
             client.Users.Show("重典");
+            System.Console.Read();
         }
     }
 }
