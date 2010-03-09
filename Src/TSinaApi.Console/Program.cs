@@ -10,10 +10,10 @@ namespace TSinaApi.Console
     {
         static void Main(string[] args)
         {
-            TSinaClient client = new TSinaClient(ClientKey.AppKey,"chsword@126.com","xxx");
+            TSinaClient client = new TSinaClient(ClientKey.AppKey, "chsword@126.com", "纟");
             var user = client.Users.Show(1660678232);
             //client.Users.Show("重典");
-           var status= client.Statuses.Update("Live Id 的问题还没解决。。。一天了。。。");
+            var status = client.Statuses.Update("小开个会");
             System.Console.Read();
         }
     }
