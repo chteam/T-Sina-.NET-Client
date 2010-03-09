@@ -41,6 +41,7 @@ namespace CHSNS.Rest
             HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(httpuri);
             if (true)
             {
+ 
                 string usernamePassword = username + ":" + password;
                 CredentialCache mycache = new CredentialCache();
                 mycache.Add(new Uri(httpuri), "Basic", new NetworkCredential(username, password));
