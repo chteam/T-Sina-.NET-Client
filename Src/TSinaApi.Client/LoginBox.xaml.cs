@@ -15,16 +15,13 @@ using System.Windows.Shapes;
 namespace TSinaApi.Client
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for LoginBox.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class LoginBox : UserControl
     {
-        public MainWindow()
+        public LoginBox()
         {
             InitializeComponent();
-          //  TSinaClient client = new TSinaClient(ClientKey.AppKey,"chsword@126.com","xxxxxxx");
-          //  client.Users.Show("重典");
-
         }
     }
 }

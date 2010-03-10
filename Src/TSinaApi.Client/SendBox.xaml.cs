@@ -15,16 +15,13 @@ using System.Windows.Shapes;
 namespace TSinaApi.Client
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for SendBox.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class SendBox : UserControl
     {
-        public MainWindow()
+        public SendBox()
         {
             InitializeComponent();
-          //  TSinaClient client = new TSinaClient(ClientKey.AppKey,"chsword@126.com","xxxxxxx");
-          //  client.Users.Show("重典");
-
         }
     }
 }
