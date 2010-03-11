@@ -7,23 +7,13 @@ using System.Runtime.Serialization;
 
 namespace TSinaApi
 {
-  [DataContract(Name="user")]
+    [DataContract(Name="user")]
     public class User
     {
-        //name: 友好显示名称，如Tim Yang(此特性暂不支持) 
-        //province:省份编码（参考省份编码表） 
-        //city: 城市编码（参考城市编码表） 
-        //location：地址 
-        //description: 个人描叙 
-        //url: 用户博客地址 
-        //profile_image_url: 自定义图像 
-        //domain: 用户个性化域名 
-
         /// <summary>
         /// 用户UID 
         /// </summary>
- 
-      [DataMember(Name="id")]
+        [DataMember(Name="id")]
         public int Id { get; set; }
         /// <summary>
         ///  screen_name: 微博昵称 
@@ -46,6 +36,15 @@ namespace TSinaApi
         public string ProfileImageUrl { get; set; }
         [DataMember(Name="domain")]
         public string Domain { get; set; }
+        //name: 友好显示名称，如Tim Yang(此特性暂不支持) 
+        //province:省份编码（参考省份编码表） 
+        //city: 城市编码（参考城市编码表） 
+        //location：地址 
+        //description: 个人描叙 
+        //url: 用户博客地址 
+        //profile_image_url: 自定义图像 
+        //domain: 用户个性化域名 
+
         //gender: 性别,m--男，f--女,n--未知 
         //email: 用户邮箱 
         //qq: qq号 

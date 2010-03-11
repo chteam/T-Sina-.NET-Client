@@ -7,6 +7,7 @@ using System.Runtime.Serialization.Json;
 using System.IO;
 using System.Xml.Serialization;
 using System.Xml;
+using System.Runtime.Serialization;
 
 namespace TSinaApi
 {
@@ -45,9 +46,12 @@ namespace TSinaApi
             }
             else if (Format == ApiFormat.xml)
             {
-                var ms = new XmlSerializer(typeof(T));
-                var xr = XmlReader.Create(new StringReader(text));
-                return (T)(ms.Deserialize(xr));
+                text = text.Replace("<?xml version=\"1.0\" encoding=\"UTF-8\"?>", "");
+                var ms = new DataContractSerializer(typeof(T));
+                using (MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(text)))
+                {
+                    return (T)(ms.ReadObject(stream));
+                }
             }
 
             return default(T);

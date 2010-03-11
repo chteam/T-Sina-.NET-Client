@@ -5,6 +5,8 @@ using System.Text;
 using System.Web;
 using System.Runtime.Serialization.Json;
 using System.IO;
+using System.ServiceModel.Web;
+using System.ServiceModel;
 
 namespace TSinaApi
 {
