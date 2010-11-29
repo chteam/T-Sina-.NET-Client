@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Net;
 using System.Globalization;
@@ -9,27 +8,32 @@ using System.Web;
 
 namespace CHSNS.Rest
 {
+    using System.Web.Routing;
+
     public class RestApi
     {
         private Uri ApiUrl { get; set; }
-
-        public RestApi(string ApiUrl)
+        public RouteValueDictionary DefaultDictionary { get; set; }
+        public RestApi(string apiUrl,object defaultDict)
         {
-            // TODO: Complete member initialization
-            this.ApiUrl = new Uri(ApiUrl);
+            DefaultDictionary = new RouteValueDictionary(defaultDict);
+            ApiUrl = new Uri(apiUrl);
         }
         #region private field
 
-        private const int c_DefaultTimeout = 10 * 1000;
+        private const int CDefaultTimeout = 10 * 1000;
         public string Username { get; set; }
         public string Password { get; set; }
 
         #endregion
 
-        public string Get(string method, IDictionary<string, string> vars, bool authenticate) {
-            return Get(new Uri(ApiUrl, method), vars, authenticate);
+        public string Get(string method, object vars, bool authenticate)
+        {
+            var dict = new RouteValueDictionary(vars);
+            dict.AddOther(DefaultDictionary);
+            return Get(new Uri(ApiUrl, method), dict, authenticate);
         }
-        public string Get(Uri uri, IDictionary<string, string> vars, bool authenticate)
+        public string Get(Uri uri, IDictionary<string, object> vars, bool authenticate)
         {
             string httpuri = uri.ToString();
             if ((vars != null) && (vars.Count > 0))
@@ -38,12 +42,11 @@ namespace CHSNS.Rest
                 httpuri += "?" + paramlist;
             }
  
-            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(httpuri);
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(httpuri);
             if (authenticate)
             {
                 string usernamePassword = Username + ":" + Password;
-                CredentialCache mycache = new CredentialCache();
-                mycache.Add(new Uri(httpuri), "Basic", new NetworkCredential(Username, Password));
+                CredentialCache mycache = new CredentialCache {{new Uri(httpuri), "Basic", new NetworkCredential(Username, Password)}};
                 request.Credentials = mycache;
                 request.Headers.Add("Authorization", "Basic " + Convert.ToBase64String(new ASCIIEncoding().GetBytes(usernamePassword))); 
             }
@@ -52,9 +55,9 @@ namespace CHSNS.Rest
             request.Headers["Accept-Language"] = "zh-cn,zh;q=0.5";
 
             request.UserAgent = "TSina 0.1" ;
-            request.ReadWriteTimeout = c_DefaultTimeout;
+            request.ReadWriteTimeout = CDefaultTimeout;
             request.Method = "Get";
-            string responseText = null;
+            string responseText;
             try
             {
                 responseText = GetResponseText(request);
@@ -67,19 +70,24 @@ namespace CHSNS.Rest
             }
             return responseText;
         }
-        public string Post(Uri uri, IDictionary<string, string> vars, bool authenticate)
+        public string Post(string method, object vars, bool authenticate)
         {
-            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(uri);
+            var dict = new RouteValueDictionary(vars);
+            dict.AddOther(DefaultDictionary);
+            return Post(new Uri(ApiUrl, method), dict, authenticate);
+        }
+        public string Post(Uri uri, IDictionary<string, object> vars, bool authenticate)
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
             if (authenticate)
             {
                 string usernamePassword = Username + ":" + Password;
-                CredentialCache mycache = new CredentialCache();
-                mycache.Add(uri, "Basic", new NetworkCredential(Username, Password));
+                CredentialCache mycache = new CredentialCache {{uri, "Basic", new NetworkCredential(Username, Password)}};
                 request.Credentials = mycache;
                 request.Headers.Add("Authorization", "Basic " + Convert.ToBase64String(new ASCIIEncoding().GetBytes(usernamePassword)));
             }
              
-            request.ReadWriteTimeout = c_DefaultTimeout;
+            request.ReadWriteTimeout = CDefaultTimeout;
             request.Method = "POST";
             request.ContentType = "application/x-www-form-urlencoded";
             if (request.ServicePoint != null)
@@ -99,7 +107,7 @@ namespace CHSNS.Rest
             }
 
             // Perform request
-            string responseText = null;
+            string responseText;
             try
             {
                 responseText = GetResponseText(request);
@@ -114,15 +122,15 @@ namespace CHSNS.Rest
         }
         #region tools
 
-        private static string GetParamString(IDictionary<string, string> vars)
+        private static string GetParamString(IDictionary<string, object> vars)
         {
             int i = 0;
             string paramlist = String.Empty;
-            foreach (KeyValuePair<string, string> kv in vars)
+            foreach (var kv in vars)
             {
                 if (kv.Value != null)
                 {
-                    paramlist += kv.Key + "=" + HttpUtility.UrlEncode(kv.Value, Encoding.UTF8);
+                    paramlist += kv.Key + "=" + HttpUtility.UrlEncode(kv.Value.ToString(), Encoding.UTF8);
                     if (i < vars.Count - 1)
                     {
                         paramlist += "&";
@@ -134,7 +142,7 @@ namespace CHSNS.Rest
         }
         private static string GetResponseText(HttpWebRequest request)
         {
-            string responseText = null;
+            string responseText;
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
             using (Stream respStream = response.GetResponseStream())
             {

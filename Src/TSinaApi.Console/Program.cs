@@ -1,17 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using TSinaApi.Client;
+﻿using TSinaApi.Client;
 
 namespace TSinaApi.Console
 {
+    using System;
+
     class Program
     {
         static void Main(string[] args)
         {
             TSinaClient client = new TSinaClient(ClientKey.AppKey, "chsword@eice.com.cn", "123456");
-            var user = client.Users.Show(1660678232);
+           /* var me = client.Users.Show("chsword@eice.com.cn");
+            Console.WriteLine(me.StatusesCount);
+            Console.WriteLine(me.Status.Text);*/
+            //var user = client.Users.Show(1660678232);
+           // Console.WriteLine("count:{0}", user.StatusesCount);
+            //client.Statuses.Update("test2是啥里"+ DateTime.Now);
+            var list = client.Users.FriendsTimeline(0);
+            foreach (var s in list)
+            {
+                Console.WriteLine(s);
+            }
             //client.Users.Show("重典");
           //  var status = client.Statuses.Update("小开个会");
             System.Console.Read();

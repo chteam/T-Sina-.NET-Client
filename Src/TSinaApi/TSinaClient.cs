@@ -22,14 +22,14 @@ namespace TSinaApi
         {
             ApiKey = apiKey;
             //ApiSecret = apiSecret;
-            Users = new UsersRest(this);
-            Statuses = new StatusesRest(this);
+            Users = new UsersRest {Client = this};
+            Statuses = new StatusesRest { Client = this };
             ApiUrl = "http://api.t.sina.com.cn/";
-            RestApi = new RestApi(ApiUrl)
-            {
-                Username = username,
-                Password = password
-            };
+            RestApi = new RestApi(ApiUrl, new {source = apiKey})
+                          {
+                              Username = username,
+                              Password = password
+                          };
             Format = ApiFormat.json;
         }
         public UsersRest Users { get; private set; }
