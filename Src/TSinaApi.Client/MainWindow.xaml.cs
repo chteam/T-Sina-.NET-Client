@@ -22,7 +22,7 @@ namespace TSinaApi.Client
         public void ShowMain()
         {
             ContentPanel.Children.Clear();
-            ContentPanel.Children.Add(new SendBox(this));
+            ContentPanel.Children.Add(new TimelineBox(this));
         }
     }
 }

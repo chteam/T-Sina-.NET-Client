@@ -8,10 +8,12 @@ namespace TSinaApi.Client
     public partial class StatusBox : UserControl
     {
         public MainWindow MainWindow { get; set; }
-        public StatusBox(MainWindow mainWindow)
+        public Status Status { get; set; }
+        public StatusBox(MainWindow mainWindow,Status status)
         {
             InitializeComponent();
             MainWindow = mainWindow;
+            Status = status;
         }
     }
 }

@@ -13,5 +13,10 @@ namespace TSinaApi.Client
             InitializeComponent();
             MainWindow = mainWindow;
         }
+
+        private void RefushEvent(object sender, System.Windows.RoutedEventArgs e)
+        {
+
+        }
     }
 }
