@@ -20,5 +20,13 @@
                 new { status }, true);
             return Client.GetObject<Status>(text);
         }
+
+        public Statuses FriendsTimeline(long sinceId)
+        {
+            var text = Client.RestApi.Get(
+               string.Format("statuses/friends_timeline.{0}", Client.Format), new { since_id = sinceId }
+               , true);
+            return Client.GetObject<Statuses>(text);
+        }
     }
 }

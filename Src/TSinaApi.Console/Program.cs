@@ -15,10 +15,10 @@ namespace TSinaApi.Console
             //var user = client.Users.Show(1660678232);
            // Console.WriteLine("count:{0}", user.StatusesCount);
             //client.Statuses.Update("test2是啥里"+ DateTime.Now);
-            var list = client.Users.FriendsTimeline(0);
+            var list = client.Statuses.FriendsTimeline(0);
             foreach (var s in list)
             {
-                Console.WriteLine(s);
+                Console.WriteLine(s.Text);
             }
             //client.Users.Show("重典");
           //  var status = client.Statuses.Update("小开个会");

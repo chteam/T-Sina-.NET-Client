@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiFormat.cs" />
+    <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Status.cs" />
     <Compile Include="Models\Statuses.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -56,7 +57,7 @@
     <Compile Include="StatusRest.cs" />
     <Compile Include="TSinaClient.cs" />
     <Compile Include="Models\User.cs" />
-    <Compile Include="StatusesRest.cs" />
+    <Compile Include="UserRest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CHSNS.Rest\CHSNS.Rest.csproj">
