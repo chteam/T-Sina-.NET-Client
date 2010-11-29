@@ -13,10 +13,10 @@
 		
 	</Window.Resources>
 
-    <StackPanel>
-        <my:LoginBox x:Name="loginBox" Width="300" Height="50" />
-        <my:SendBox HorizontalAlignment="Left"  x:Name="sendBox" VerticalAlignment="Top" />
-        <StackPanel Height="211" HorizontalAlignment="Left" Name="stackPanel1" VerticalAlignment="Top" Width="229"></StackPanel>
+    <StackPanel Name="ContentPanel">
+       
+        <!--<my:SendBox HorizontalAlignment="Left"  x:Name="sendBox" VerticalAlignment="Top" />
+        <StackPanel Height="211" HorizontalAlignment="Left" Name="stackPanel1" VerticalAlignment="Top" Width="229"></StackPanel>-->
 
     </StackPanel>
 </Window>

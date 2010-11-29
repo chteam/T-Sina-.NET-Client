@@ -1,16 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows;
 
 namespace TSinaApi.Client
 {
@@ -19,12 +7,22 @@ namespace TSinaApi.Client
     /// </summary>
     public partial class MainWindow : Window
     {
+        public TSinaClient Client { get; set; }
         public MainWindow()
         {
             InitializeComponent();
-          //  TSinaClient client = new TSinaClient(ClientKey.AppKey,"chsword@126.com","xxxxxxx");
-          //  client.Users.Show("重典");
+            ShowLogin();
+        }
 
+        private void ShowLogin()
+        {
+            ContentPanel.Children.Clear(); 
+            ContentPanel.Children.Add(new LoginBox(this));
+        }
+        public void ShowMain()
+        {
+            ContentPanel.Children.Clear();
+            ContentPanel.Children.Add(new SendBox(this));
         }
     }
 }
