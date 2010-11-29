@@ -14,7 +14,7 @@ namespace TSinaApi
         /// 用户UID 
         /// </summary>
         [DataMember(Name="id")]
-        public int Id { get; set; }
+        public long Id { get; set; }
         /// <summary>
         ///  screen_name: 微博昵称 
         /// </summary>

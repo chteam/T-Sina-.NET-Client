@@ -18,7 +18,7 @@ namespace TSinaApi
         /// id: 微博ID 
         /// </summary>
         [DataMember(Name = "id")]
-        public int Id { get; set; }
+        public long Id { get; set; }
         //text：微博信息内容 
         [DataMember(Name = "text")]
         public string Text { get; set; }

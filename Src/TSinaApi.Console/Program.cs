@@ -10,7 +10,7 @@ namespace TSinaApi.Console
     {
         static void Main(string[] args)
         {
-            TSinaClient client = new TSinaClient(ClientKey.AppKey, "chsword@126.com", "xxx");
+            TSinaClient client = new TSinaClient(ClientKey.AppKey, "chsword@eice.com.cn", "123456");
             var user = client.Users.Show(1660678232);
             //client.Users.Show("重典");
           //  var status = client.Statuses.Update("小开个会");

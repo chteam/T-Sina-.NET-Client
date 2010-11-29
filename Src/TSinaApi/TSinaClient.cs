@@ -41,7 +41,8 @@ namespace TSinaApi
                 DataContractJsonSerializer js = new DataContractJsonSerializer(typeof(T));
                 using (MemoryStream stream = new MemoryStream(Encoding.Unicode.GetBytes(text)))
                 {
-                    return (T)js.ReadObject(stream);
+                    var obj = js.ReadObject(stream);
+                    return (T)obj;
                 }
             }
             else if (Format == ApiFormat.xml)
@@ -50,7 +51,8 @@ namespace TSinaApi
                 var ms = new DataContractSerializer(typeof(T));
                 using (MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(text)))
                 {
-                    return (T)(ms.ReadObject(stream));
+                    var obj = ms.ReadObject(stream);
+                    return (T)obj;
                 }
             }
 
