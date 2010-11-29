@@ -60,6 +60,12 @@
     <Compile Include="SendBox.xaml.cs">
       <DependentUpon>SendBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="StatusBox.xaml.cs">
+      <DependentUpon>StatusBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TimelineBox.xaml.cs">
+      <DependentUpon>TimelineBox.xaml</DependentUpon>
+    </Compile>
     <Page Include="LoginBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -78,6 +84,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="SendBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StatusBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TimelineBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
