@@ -6,7 +6,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="82" d:DesignWidth="300">
     <Grid Height="81">
-        <TextBox Height="40"  Name="textBlock1" Text="" VerticalAlignment="Top"  />
-        <Button Content="Send" Height="26" HorizontalAlignment="Left" Margin="218,50,0,0" Name="button1" VerticalAlignment="Top" Width="82" />
+        <TextBox Height="40"  Name="text" Text="" VerticalAlignment="Top"  />
+        <Button Content="Send" Height="26" HorizontalAlignment="Left" Margin="218,50,0,0" VerticalAlignment="Top" Width="82" Click="SendEvent" />
     </Grid>
 </UserControl>

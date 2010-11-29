@@ -14,5 +14,10 @@ namespace TSinaApi.Client
             MainWindow = mainWindow;
         }
 
+        private void SendEvent(object sender, System.Windows.RoutedEventArgs e)
+        {
+            MainWindow.Client.Statuses.Update(text.Text);
+        }
+
     }
 }
