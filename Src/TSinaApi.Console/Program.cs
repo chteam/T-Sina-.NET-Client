@@ -1,7 +1,7 @@
 ﻿namespace TSinaApi.ConsoleTest
 {
     using System;
-    using Console;
+ 
 
     class Program
     {
