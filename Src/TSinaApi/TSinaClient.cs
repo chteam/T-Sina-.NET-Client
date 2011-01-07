@@ -6,9 +6,11 @@ using System.Runtime.Serialization;
 
 namespace TSinaApi
 {
+    using System;
+
     public class TSinaClient
     {
-        public string ApiUrl { get; private set; }
+        public Uri ApiUrl { get; private set; }
         public long ApiKey { get; set; }
         //public string ApiSecret { get; set; }
         public RestApi RestApi { get; set; }
@@ -24,14 +26,21 @@ namespace TSinaApi
             //ApiSecret = apiSecret;
             Users = new UsersRest {Client = this};
             Statuses = new StatusesRest { Client = this };
-            ApiUrl = "http://api.t.sina.com.cn/";
-            RestApi = new RestApi(ApiUrl, new {source = apiKey})
+            ApiUrl = new Uri("http://api.t.sina.com.cn/");
+            RestApi = new RestApi(new {source = apiKey})
                           {
                               Username = username,
-                              Password = password
+                              Password = password,
+                              GenerateUrlFunc = GenerateUrl
                           };
             FormatType = ApiFormat.Json;
         }
+
+        private Uri GenerateUrl(string method)
+        {
+            return new Uri(ApiUrl, string.Format("{0}.{1}", method, Format));
+        }
+
         public UsersRest Users { get; private set; }
         public StatusesRest Statuses { get; set; }
         public T GetObject<T>(string text)

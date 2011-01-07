@@ -12,26 +12,26 @@ namespace CHSNS.Rest
 
     public class RestApi
     {
-        private Uri ApiUrl { get; set; }
-        public RouteValueDictionary DefaultDictionary { get; set; }
-        public RestApi(string apiUrl,object defaultDict)
+
+        public RestApi(object defaultDict)
         {
             DefaultDictionary = new RouteValueDictionary(defaultDict);
-            ApiUrl = new Uri(apiUrl);
+          
         }
         #region private field
 
+        public RouteValueDictionary DefaultDictionary { get; set; }
         private const int CDefaultTimeout = 10 * 1000;
         public string Username { get; set; }
         public string Password { get; set; }
-
+        public Func<string, Uri> GenerateUrlFunc { private get; set; }
         #endregion
 
         public string Get(string method, object vars=null, bool authenticate=true)
         {
             var dict = new RouteValueDictionary(vars);
             dict.AddOther(DefaultDictionary);
-            return Get(new Uri(ApiUrl, method), dict, authenticate);
+            return Get(GenerateUrlFunc(method), dict, authenticate);
         }
         public string Get(Uri uri, IDictionary<string, object> vars, bool authenticate)
         {
@@ -74,7 +74,7 @@ namespace CHSNS.Rest
         {
             var dict = new RouteValueDictionary(vars);
             dict.AddOther(DefaultDictionary);
-            return Post(new Uri(ApiUrl, method), dict, authenticate);
+            return Post(GenerateUrlFunc(method), dict, authenticate);
         }
 
         public string Post(Uri uri, IDictionary<string, object> vars, bool authenticate)
