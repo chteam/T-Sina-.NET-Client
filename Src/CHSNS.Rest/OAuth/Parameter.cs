@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Net;
-
-using System.Globalization;
-
-namespace CHSNS.Rest
+﻿namespace CHSNS.Rest.OAuth
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+
     /// <summary>
     /// Parameter with name and value.
     /// </summary>

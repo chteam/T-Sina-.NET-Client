@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace CHSNS.Rest
+﻿namespace CHSNS.Rest.OAuth
 {
+    using System;
+
     /// <summary>
     /// Stands for access token
     /// </summary>

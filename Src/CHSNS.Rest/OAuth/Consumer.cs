@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Net;
-using System.Security.Cryptography;
-using System.IO;
-
-namespace CHSNS.Rest
+﻿namespace CHSNS.Rest.OAuth
 {
+    using System;
+    using System.Text;
+    using System.Net;
+    using System.Security.Cryptography;
+    using System.IO;
+
     /// <summary>
     /// Consumer object stands for consumer in OAuth protocol.
     /// </summary>
