@@ -70,12 +70,13 @@ namespace CHSNS.Rest
             }
             return responseText;
         }
-        public string Post(string method, object vars, bool authenticate)
+        public string Post(string method, object vars, bool authenticate = true)
         {
             var dict = new RouteValueDictionary(vars);
             dict.AddOther(DefaultDictionary);
             return Post(new Uri(ApiUrl, method), dict, authenticate);
         }
+
         public string Post(Uri uri, IDictionary<string, object> vars, bool authenticate)
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
