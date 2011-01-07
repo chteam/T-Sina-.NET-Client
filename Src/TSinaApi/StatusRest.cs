@@ -10,8 +10,7 @@
                 replyTo = replyTo.Insert(0, "@");
             var text = Client.RestApi.Post(
                 string.Format("statuses/update.{0}", Client.Format),
-                new { status, in_reply_to_status_id = replyTo }
-                , true);
+                new { status, in_reply_to_status_id = replyTo });
             return Client.GetObject<Status>(text);
         }
         public Status Update(string status)
@@ -19,15 +18,14 @@
 
             var text = Client.RestApi.Post(
                 string.Format("statuses/update.{0}", Client.Format),
-                new { status }, true);
+                new { status });
             return Client.GetObject<Status>(text);
         }
 
         public Statuses FriendsTimeline(long sinceId)
         {
             var text = Client.RestApi.Get(
-               string.Format("statuses/friends_timeline.{0}", Client.Format), new { since_id = sinceId }
-               , true);
+               string.Format("statuses/friends_timeline.{0}", Client.Format), new { since_id = sinceId });
             return Client.GetObject<Statuses>(text);
         }
     }

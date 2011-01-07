@@ -27,7 +27,7 @@ namespace CHSNS.Rest
 
         #endregion
 
-        public string Get(string method, object vars, bool authenticate)
+        public string Get(string method, object vars=null, bool authenticate=true)
         {
             var dict = new RouteValueDictionary(vars);
             dict.AddOther(DefaultDictionary);
@@ -70,7 +70,7 @@ namespace CHSNS.Rest
             }
             return responseText;
         }
-        public string Post(string method, object vars, bool authenticate = true)
+        public string Post(string method, object vars = null, bool authenticate = true)
         {
             var dict = new RouteValueDictionary(vars);
             dict.AddOther(DefaultDictionary);
