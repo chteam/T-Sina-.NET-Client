@@ -1,8 +1,7 @@
-﻿using TSinaApi.Client;
-
-namespace TSinaApi.Console
+﻿namespace TSinaApi.ConsoleTest
 {
     using System;
+    using Console;
 
     class Program
     {
