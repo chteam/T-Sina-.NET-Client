@@ -1,4 +1,4 @@
-namespace TSinaApi
+namespace TSinaApi.Models
 {
     using System.Collections.Generic;
 

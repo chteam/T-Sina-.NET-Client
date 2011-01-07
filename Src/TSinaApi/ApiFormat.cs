@@ -2,7 +2,7 @@
 {
     public enum ApiFormat
     {
-        json = 0,
-        xml = 1
+        Json = 0,
+        Xml = 1
     }
 }

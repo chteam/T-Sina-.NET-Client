@@ -2,6 +2,8 @@
 
 namespace TSinaApi.Client
 {
+    using Models;
+
     /// <summary>
     /// StatusBox.xaml 的交互逻辑
     /// </summary>

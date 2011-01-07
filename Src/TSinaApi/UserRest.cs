@@ -1,5 +1,7 @@
 ﻿namespace TSinaApi
 {
+    using Models;
+
     public class UsersRest :RestBase
     {
 

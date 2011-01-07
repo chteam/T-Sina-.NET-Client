@@ -1,7 +1,7 @@
-﻿using System.Runtime.Serialization;
-
-namespace TSinaApi
+﻿namespace TSinaApi.Models
 {
+    using System.Runtime.Serialization;
+
     [DataContract(Name = "status")]
     public class Status
     {
