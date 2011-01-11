@@ -143,10 +143,23 @@
                 "statuses/unread", new {since_id = sinceId, with_new_status = withNewStatus ? 0 : 1});
             return Client.GetObject<UnRead>(text);
         }
-        /*
-statuses/reset_count 未读消息数清零接口 
-emotions 表情接口，获取表情列表 
 
-         */
+        /// <summary>
+        /// 未读消息数清零接口
+        /// 1. 评论数，2. @me数，3. 私信数，4. 关注数
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public bool ResetCount(int type)
+        {
+            var text = RestApi.Post("statuses/reset_count", new {type});
+            return Client.GetObject<ResetCount>(text).Result;
+        }
+
+        public Emotions Emotions()
+        {
+            var text = RestApi.Get("statuses/emotions");
+            return Client.GetObject<Emotions>(text);
+        }
     }
 }
