@@ -14,10 +14,10 @@
             //var user = client.Users.Show(1660678232);
            // Console.WriteLine("count:{0}", user.StatusesCount);
             //client.Statuses.Update("test2是啥里"+ DateTime.Now);
-            var list = client.Statuses.FriendsTimeline(0);
+            var list = client.Statuses.Emotions();
             foreach (var s in list)
             {
-                Console.WriteLine(s.Text);
+                Console.WriteLine(s.Url);
             }
             //client.Users.Show("重典");
           //  var status = client.Statuses.Update("小开个会");

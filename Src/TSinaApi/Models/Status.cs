@@ -1,5 +1,6 @@
 ﻿namespace TSinaApi.Models
 {
+    using System.Collections.Generic;
     using System.Runtime.Serialization;
 
     [DataContract(Name = "status")]
@@ -53,5 +54,9 @@
         //retweeted_status: 转发的博文，内容为status，如果不是转发，则没有此字段 
         [DataMember(Name = "retweeted_status")]
         public Status RetweetedStatus { get; set; }
+    }
+    public class Statuses : List<Status>
+    {
+
     }
 }

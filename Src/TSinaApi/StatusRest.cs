@@ -158,7 +158,7 @@
 
         public Emotions Emotions()
         {
-            var text = RestApi.Get("statuses/emotions");
+            var text = RestApi.Get("emotions");
             return Client.GetObject<Emotions>(text);
         }
     }
