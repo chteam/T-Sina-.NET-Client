@@ -1,6 +1,15 @@
 ﻿namespace TSinaApi.Models
 {
+    using System.Collections.Generic;
     using System.Runtime.Serialization;
+    public class Users : List<User>
+    {
+        [DataMember(Name = "next_cursor")]
+        public int NextCursor { get; set; }
+        [DataMember(Name = "previous_cursor")]
+        public int PrevCursor { get; set; }
+
+    }
 
     [DataContract(Name="user")]
     public class User

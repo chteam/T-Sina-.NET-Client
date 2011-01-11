@@ -51,7 +51,6 @@
   <ItemGroup>
     <Compile Include="ApiFormat.cs" />
     <Compile Include="Models\Comment.cs" />
-    <Compile Include="Models\Comments.cs" />
     <Compile Include="Models\Count.cs" />
     <Compile Include="Models\Emotion.cs" />
     <Compile Include="Models\ResetCount.cs" />

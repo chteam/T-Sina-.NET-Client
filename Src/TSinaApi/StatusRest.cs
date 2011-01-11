@@ -5,20 +5,17 @@
 
     public class StatusesRest : RestBase
     {
-        public Status Update(string status, string replyTo)
+       
+        public Status Update(string status, string replyTo = null, float? lat = null, float? @long = null, string annotations=null)
         {
-            if (!replyTo.StartsWith("@")) replyTo = replyTo.Insert(0, "@");
-            var text = RestApi.Post("statuses/update",
-                new { status, in_reply_to_status_id = replyTo });
+            Contract.Requires(lat >= -90 && lat <= 90);
+            Contract.Requires(@long >= -180 && @long <= 180);
+            Contract.Requires(annotations == null || annotations.Length < 512);
+            if (replyTo != null && !replyTo.StartsWith("@")) replyTo = replyTo.Insert(0, "@");
+            var text = RestApi.Post("statuses/update", new {status, in_reply_to_status_id = replyTo, lat, @long, annotations});
             return Client.GetObject<Status>(text);
         }
-
-        public Status Update(string status)
-        {
-            var text = RestApi.Post("statuses/update",new { status });
-            return Client.GetObject<Status>(text);
-        }
-
+        //todo upload pic
         /// <summary>
         /// 0全部，1原创，2图片，3视频，4音乐
         /// </summary>
@@ -29,6 +26,22 @@
             var text = RestApi.Get(
                 "statuses/friends_timeline", new {since_id = sinceId,max_id=maxId, feature, count, page});
             return Client.GetObject<Statuses>(text);
+        }
+ 
+        public Users Friends(long? userId = null, string screenName = null, int cursor = -1, int count = 20)
+        {
+            Contract.Requires(count >= 20 && count <= 200);
+            var text = RestApi.Get(
+                "statuses/friends", new { user_id = userId, screen_name = screenName, count, cursor });
+            return Client.GetObject<Users>(text);
+        }
+
+        public Users Followers(long? userId = null, string screenName = null, int cursor = -1, int count = 20)
+        {
+            Contract.Requires(count >= 20 && count <= 200);
+            var text = RestApi.Get(
+                "statuses/followers", new {user_id = userId, screen_name = screenName, count, cursor});
+            return Client.GetObject<Users>(text);
         }
 
         public Statuses PublicTimeline(int count = 20)
@@ -171,9 +184,50 @@
             return Client.GetObject<Status>(text);
         }
 
-        public string RedirectToWeb(string userId,long id)
+        public string GetStatusWebUrl(string userId,long id)
         {
             return string.Format("http://api.t.sina.com.cn/{0}/statuses/{1}.json", userId, id);
+        }
+
+        /// <summary>
+        /// 删除
+        /// </summary>
+        public Status Destroy(long id)
+        {
+            var text = RestApi.Post("statuses/destroy/" + id);
+            return Client.GetObject<Status>(text);
+        }
+
+        public Status Repost(long id,string status=null,bool isComment=false)
+        {
+            var text = RestApi.Post("statuses/repost", new {id, is_comment = isComment ? 1 : 0, status});
+            return Client.GetObject<Status>(text);
+        }
+
+        public Comment Comment(long id, string comment = null, long? commentId = null)
+        {
+            var text = RestApi.Post("statuses/comment", new {id, cid = commentId, comment});
+            return Client.GetObject<Comment>(text);
+        }
+        /// <summary>
+        /// 回复评论
+        /// </summary>
+        public Comment Reply(long id, string comment = null, long? commentId = null)
+        {
+            var text = RestApi.Post("statuses/reply", new {id, cid = commentId, comment});
+            return Client.GetObject<Comment>(text);
+        }
+
+
+        public Comment CommentDestroy(long id)
+        {
+            var text = RestApi.Post("statuses/comment_destroy/" + id);
+            return Client.GetObject<Comment>(text);
+        }
+        public Comments CommentDestroyBatch(params long[] id)
+        {
+            var text = RestApi.Post("statuses/comment/destroy_batch", new {ids = string.Join(",", id)});
+            return Client.GetObject<Comments>(text);
         }
     }
 }

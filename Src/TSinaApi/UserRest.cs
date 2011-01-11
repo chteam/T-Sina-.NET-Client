@@ -5,14 +5,9 @@
     public class UsersRest :RestBase
     {
 
-        public User Show(long id)
+        public User Show(string id, long? userId = null, string screenName = null)
         {
-            var text = RestApi.Get(string.Format("users/show/{0}", id));
-            return Client.GetObject<User>(text);
-        }
-        public User Show(string name)
-        {
-            var text = RestApi.Get("users/show", new {screen_name = name});
+            var text = RestApi.Get("users/show/" + id, new {user_id = userId, screen_name = screenName});
             return Client.GetObject<User>(text);
         }
 

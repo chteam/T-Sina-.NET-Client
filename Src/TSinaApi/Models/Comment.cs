@@ -1,5 +1,6 @@
 namespace TSinaApi.Models
 {
+    using System.Collections.Generic;
     using System.Runtime.Serialization;
 
     [DataContract(Name = "comment")]
@@ -24,5 +25,10 @@ namespace TSinaApi.Models
         [DataMember(Name = "reply_comment")]
         public Comment ReplyComment { get; set; }
  
+    }
+
+    public class Comments : List<Comment>
+    {
+
     }
 }
