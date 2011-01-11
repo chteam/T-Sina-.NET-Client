@@ -26,6 +26,7 @@ namespace TSinaApi
             //ApiSecret = apiSecret;
             Users = new UsersRest {Client = this};
             Statuses = new StatusesRest { Client = this };
+            FriendShips = new FriendShipsRest {Client = this};
             ApiUrl = new Uri("http://api.t.sina.com.cn/");
             RestApi = new RestApi(new {source = apiKey})
                           {
@@ -43,6 +44,7 @@ namespace TSinaApi
 
         public UsersRest Users { get; private set; }
         public StatusesRest Statuses { get; set; }
+        public FriendShipsRest FriendShips { get; set; }
         public T GetObject<T>(string text)
         {
             if (FormatType == ApiFormat.Json)
