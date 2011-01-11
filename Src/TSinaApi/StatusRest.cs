@@ -62,17 +62,88 @@
                 "statuses/mentions", new {since_id = sinceId, max_id = maxId, count, page});
             return Client.GetObject<Statuses>(text);
         }
+        /// <summary>
+        /// 获取当前用户发送及收到的评论列表 
+        /// </summary>
+        public Comments CommentsTimeline(long? sinceId = null, long? maxId = null, int page = 1, int count = 20)
+        {
+            Contract.Requires(count >= 20 && count <= 200);
+            var text = RestApi.Get(
+                "statuses/comments_timeline", new { since_id = sinceId, max_id = maxId, count, page });
+            return Client.GetObject<Comments>(text);
+        }
+        /// <summary>
+        /// 获取当前用户发出的评论 
+        /// </summary>
+        public Comments CommentsByMe(long? sinceId = null, long? maxId = null, int page = 1, int count = 20)
+        {
+            Contract.Requires(count >= 20 && count <= 200);
+            var text = RestApi.Get(
+                "statuses/comments_by_me", new { since_id = sinceId, max_id = maxId, count, page });
+            return Client.GetObject<Comments>(text);
+        }
+        /// <summary>
+        /// 获取当前用户收到的评论 
+        /// </summary>
+        public Comments CommentsToMe(long? sinceId = null, long? maxId = null, int page = 1, int count = 20)
+        {
+            Contract.Requires(count >= 20 && count <= 200);
+            var text = RestApi.Get(
+                "statuses/comments_to_me", new { since_id = sinceId, max_id = maxId, count, page });
+            return Client.GetObject<Comments>(text);
+        }
 
+        /// <summary>
+        /// 根据微博消息ID返回某条微博消息的评论列表 
+        /// </summary>
+        public Comments Comments(long id, int page = 1, int count = 20)
+        {
+            Contract.Requires(count >= 20 && count <= 200);
+            var text = RestApi.Get(
+                "statuses/comments", new { id, count, page });
+            return Client.GetObject<Comments>(text);
+        }
+        /// <summary>
+        /// 批量获取一组微博的评论数及转发数
+        /// </summary>
+        public Counts Counts(params long[] id)
+        {
+            Contract.Requires(id.Length > 0);
+            var text = RestApi.Get(
+                "statuses/counts", new { id = string.Join(",", id) });
+            return Client.GetObject<Counts>(text);
+        }
+
+        /// <summary>
+        /// 返回一条原创微博的最新n条转发微博信息 New! 
+        /// </summary>
+        public Statuses RepostTimeline(long id,long? sinceId = null, long? maxId = null, int page = 1, int count = 20)
+        {
+            Contract.Requires(count >= 20 && count <= 200);
+            var text = RestApi.Get(
+                "statuses/repost_timeline", new { id, since_id = sinceId, max_id = maxId, count, page });
+            return Client.GetObject<Statuses>(text);
+        }
+        /// <summary>
+        /// 返回用户转发的最新n条微博信息 New! 
+        /// </summary>
+        public Statuses RepostByMe(long id, long? sinceId = null, long? maxId = null, int page = 1, int count = 20)
+        {
+            Contract.Requires(count >= 20 && count <= 200);
+            var text = RestApi.Get(
+                "statuses/repost_by_me", new { id, since_id = sinceId, max_id = maxId, count, page });
+            return Client.GetObject<Statuses>(text);
+        }
+        /// <summary>
+        /// 获取当前用户未读消息数
+        /// </summary>
+        public UnRead UnRead(long? sinceId = null, bool withNewStatus = false)
+        {
+            var text = RestApi.Get(
+                "statuses/unread", new {since_id = sinceId, with_new_status = withNewStatus ? 0 : 1});
+            return Client.GetObject<UnRead>(text);
+        }
         /*
-         statuses/mentions 获取@当前用户的微博列表 
-statuses/comments_timeline 获取当前用户发送及收到的评论列表 
-statuses/comments_by_me 获取当前用户发出的评论 
-statuses/comments_to_me 获取当前用户收到的评论 
-statuses/comments 根据微博消息ID返回某条微博消息的评论列表 
-statuses/counts 批量获取一组微博的评论数及转发数 
-statuses/repost_timeline 返回一条原创微博的最新n条转发微博信息 New! 
-statuses/repost_by_me 返回用户转发的最新n条微博信息 New! 
-statuses/unread 获取当前用户未读消息数 
 statuses/reset_count 未读消息数清零接口 
 emotions 表情接口，获取表情列表 
 

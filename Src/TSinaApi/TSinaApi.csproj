@@ -51,6 +51,9 @@
   <ItemGroup>
     <Compile Include="ApiFormat.cs" />
     <Compile Include="Models\Comment.cs" />
+    <Compile Include="Models\Comments.cs" />
+    <Compile Include="Models\Count.cs" />
+    <Compile Include="Models\UnRead.cs" />
     <Compile Include="Models\Status.cs" />
     <Compile Include="Models\Statuses.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
