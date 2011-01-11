@@ -161,5 +161,19 @@
             var text = RestApi.Get("emotions");
             return Client.GetObject<Emotions>(text);
         }
+
+        /// <summary>
+        /// 根据ID获取单条微博消息，以及该微博消息的作者信息。 
+        /// </summary>
+        public Status Show(long id)
+        {
+            var text = RestApi.Post("statuses/show/" + id);
+            return Client.GetObject<Status>(text);
+        }
+
+        public string RedirectToWeb(string userId,long id)
+        {
+            return string.Format("http://api.t.sina.com.cn/{0}/statuses/{1}.json", userId, id);
+        }
     }
 }
